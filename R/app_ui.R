@@ -15,6 +15,8 @@ app_ui <- function(request) {
             sidebar = sidebar(
                 width = 300,
                 title = "Toolbox",
+                mod_import_ui("import_1"),
+                hr(),
                 "Pipeline Tools",
                 actionButton("add_filter", "Filter", icon = icon("filter"), class = "btn-info w-100 mb-2"),
                 actionButton("add_select", "Select", icon = icon("check-square"), class = "btn-primary w-100 mb-2"),
@@ -25,9 +27,7 @@ app_ui <- function(request) {
                 actionButton("add_join", "Join", icon = icon("object-group"), class = "btn-secondary w-100 mb-2"),
                 hr(),
                 "Visualization",
-                actionButton("add_plot", "Plot", icon = icon("chart-bar"), class = "btn-dark w-100 mb-2"),
-                hr(),
-                mod_import_ui("import_1")
+                actionButton("add_plot", "Plot", icon = icon("chart-bar"), class = "btn-dark w-100 mb-2")
             ),
             layout_column_wrap(
                 width = 1 / 2,
