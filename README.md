@@ -1,4 +1,5 @@
 <p align="center">
+  <img src="logo.png" alt="TidyBlock Logo" width="300">
   <h1 align="center">🧱 TidyBlock</h1>
   <p align="center">
     <strong>A Visual, Node-Based GUI for dplyr Data Wrangling</strong>
