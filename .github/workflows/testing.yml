@@ -1,0 +1,34 @@
+name: R-CMD-check and Tests
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install system dependencies
+        run: sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: Install R package dependencies
+        run: |
+          install.packages(c("shiny", "bslib", "readr", "readxl", "dplyr", "rlang", "rhandsontable", "DT", "ggplot2", "stringr", "forcats", "lubridate", "tidyr", "scales", "testthat"))
+        shell: Rscript {0}
+
+      - name: Run testthat
+        run: |
+          library(testthat)
+          test_dir("tests")
+        shell: Rscript {0}

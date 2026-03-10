@@ -1,300 +1,77 @@
-<p align="center">
-  <img src="logo.png" alt="TidyBlock Logo" width="300">
-  <h1 align="center">🧱 TidyBlock</h1>
-  <p align="center">
-    <strong>A Visual, Node-Based GUI for dplyr Data Wrangling</strong>
-  </p>
-  <p align="center">
-    Build tidyverse pipelines by dragging and clicking — no coding required.
-  </p>
-  <p align="center">
-    <img src="https://img.shields.io/badge/version-1.0.0-blue" alt="Version">
-    <img src="https://img.shields.io/badge/R-%3E%3D%204.3.0-blue?logo=r" alt="R Version">
-    <img src="https://img.shields.io/badge/Shiny-1.9+-green?logo=r" alt="Shiny">
-    <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
-  </p>
-</p>
+# TidyBlock 🧱📊
+**A Spreadsheet-like GUI for Tidyverse Data Wrangling and ggplot2 Visualization**
 
----
+TidyBlock is an intuitive, open-source `R Shiny` application designed to bring the power of the `tidyverse` and `ggplot2` to users who prefer a graphical, spreadsheet-like interface over scripting. It bridges the gap between traditional manual tools like Microsoft Excel and robust, reproducible R-based pipelines.
 
-## 📖 Overview
+![TidyBlock Plot Builder UI](https://raw.githubusercontent.com/tidyverse/ggplot2/main/man/figures/logo.png) <!-- Update with an actual screenshot later -->
 
-**TidyBlock** is an R Shiny application that lets you visually construct `dplyr` data-wrangling pipelines through an intuitive, block-based interface. Instead of writing R code manually, you add pipeline modules (Filter, Select, Mutate, etc.) as visual cards and configure them through dropdowns and inputs. TidyBlock generates the equivalent R code in real time.
+## ✅ Features
 
-### ✨ Key Features
+### 1. Spreadsheet Interaction
+Built on top of `rhandsontable`, TidyBlock offers an intuitive Excel-like experience inside your browser. Navigate cells, drop down columns, sort tables on the fly with a click, and manually verify data just as you would in standard spreadsheet software.
 
-| Feature | Description |
-|---------|------------|
-| 🔍 **Advanced Filter** | Build complex filter conditions with AND/OR groups and nested logic |
-| 📋 **Select** | Choose which columns to keep |
-| ➕ **Mutate** | Create new columns with custom R expressions |
-| 📊 **Group By** | Group data by one or more variables |
-| 📈 **Summarize** | Aggregate data with mean, sum, median, sd, min, max, n, n_distinct |
-| ↕️ **Arrange** | Sort data ascending or descending |
-| 🔗 **Join** | Left/Inner/Right/Full join with auto-detected keys |
-| 📉 **Plot** | Create ggplot2 visualizations (Point, Bar, Line, Boxplot) with themes |
-| 💻 **Live Code Preview** | See the generated dplyr pipeline code update in real time |
-| 📊 **Live Data Preview** | Instantly see filtered/transformed data as you build |
-| ↔️ **Resizable Cards** | Resize module cards with drag handles |
+### 2. Core Data Wrangling (Dplyr & Tidyr)
+Transform your data without writing code. A modern top-navigation toolbar organizes operations logically into Rows, Columns, and Reshape functions, including:
+- **Filtering & Distinct (`filter`, `distinct`)**
+- **Column Operations (`select`, `rename`)**
+- **Dynamic Variable Creation (`mutate` with helpers from `stringr` and `lubridate` APIs)**
+- **Grouping and Aggregation (`group_by %>% summarise`)**
+- **Table Combination (`left_join`, `inner_join`)**
+- **Reshaping (`pivot_longer`, `pivot_wider`)**
 
----
+### 3. Advanced ggplot2 Builder (Layer by Layer)
+Eliminate the steep learning curve of R data visualization. TidyBlock includes an integrated "Plot Explorer" mode that spins off complex visualizations. Using a side-by-side builder, users can:
+- **Aesthetic Mapping:** Assign global traits like `x`, `y`, `color`, `fill`, `alpha`, and advanced mappings (e.g., `y = after_stat(density)`).
+- **Multiple Layers:** Synthesize and overlap geometries (`geom_point`, `geom_smooth`, `geom_density`, `geom_boxplot`, and over 15 others).
+- **Annotations:** Draw direct statistical baselines with inputs like `geom_hline` intercepts.
+- **Scales & Coordinates:** Adjust axis limits intuitively, compress out-of-bounds outliers (`oob_squish`), and transform views entirely via log10 scalers or `coord_radial/polar` spatial views.
+- **Grids & Themes:** Instantly apply `theme_minimal`, modify base grid grids, or inject rich ColorBrewer palettes.
 
-## 🖼️ Screenshots
+### 4. Non-Destructive Workflows
+Every fundamental change you make—like aggregating the data or reshaping its dimensions—does *not* overwrite your base document. Instead, actions spawn brand **new tabs**, preserving the original spreadsheet while visually logging a sequential state history.
 
-> After launching the app, load the demo Iris dataset and add pipeline modules from the sidebar.
+## 🛠 Installation / Setup
 
-### Pipeline with Filter, Select, and Mutate
-```
-┌─────────────────────────────────────────────────────┐
-│  TidyBlock                                          │
-├──────────┬──────────────────┬────────────────────────┤
-│ Toolbox  │ Data Preview     │ Filter (Advanced)      │
-│          │                  │  [AND ▼] [+ Rule]      │
-│ ▶ Filter │  Sepal.Length... │  Sepal.Length == 5.1    │
-│ ▶ Select │                  ├────────────────────────┤
-│ ▶ Mutate │                  │ Select                 │
-│ ▶ GroupBy│                  │  [Sepal.Length, ...]    │
-│ ▶ Summ.  │ R Code Preview   ├────────────────────────┤
-│ ▶ Arrange│  iris |>         │ Mutate                 │
-│ ▶ Join   │   filter(...) |> │  new_var = log(...)    │
-│          │   select(...) |> │                        │
-│ ▶ Plot   │   mutate(...)    │                        │
-└──────────┴──────────────────┴────────────────────────┘
-```
-
----
-
-## 🚀 Getting Started
+You can deploy TidyBlock using `R` and standard packages.
 
 ### Prerequisites
 
-- **R** >= 4.3.0
-- **Conda** (Miniconda or Anaconda) — recommended for reproducible environments
+Ensure you have R (>= 4.3.0) installed. We recommend using `renv` or the included `environment.yml` for Conda to handle the `shiny` and `tidyverse` requirements safely.
 
-### Installation
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/amufaamo/tidyblock.git
+   cd tidyblock
+   ```
 
-#### Option 1: Using Conda (Recommended)
+2. Open R and install the necessary dependencies from CRAN:
+   ```R
+   install.packages(c(
+     "shiny", "bslib", "dplyr", "tidyr", "ggplot2", 
+     "rhandsontable", "DT", "forcats", "stringr", "lubridate", "scales"
+   ))
+   ```
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/amufaamo/tidyblock.git
-cd tidyblock
+3. Start the application:
+   ```R
+   shiny::runApp('app.R')
+   ```
 
-# 2. Create the Conda environment
-conda env create -f environment.yml
+## 🧪 Testing
 
-# 3. Activate the environment
-conda activate void
-
-# 4. Launch the app
-R -e "shiny::runApp()"
+TidyBlock incorporates `testthat` for automatic validation of its UI-driven data wrangling logic. Tests cover core operations from parsing raw UI logic filters down to validating structural `pivot` actions.
+Run tests via:
+```R
+library(testthat)
+test_dir("tests/")
 ```
+GitHub Actions ensures unit testing validates every commit to `master/main`.
 
-#### Option 2: Manual R Package Installation
+## 📄 Submission to JOSS
+This tool is formulated for submission to the **Journal of Open Source Software (JOSS)**. The associated paper draft is located in `paper.md`, documenting the underlying framework, educational viability, and need for the software across empirical research domains. 
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/amufaamo/tidyblock.git
-cd tidyblock
+## 👨‍💻 Contributing
+Pull requests, feature suggestions, and bug reports are heavily encouraged.
 
-# 2. Install dependencies in R
-R -e "install.packages(c('shiny', 'bslib', 'tidyverse', 'rlang', 'DT', 'shinyAce', 'shinyjqui', 'bsicons', 'glue', 'pkgload'))"
-
-# 3. Launch the app
-R -e "shiny::runApp()"
-```
-
-The app will open at `http://127.0.0.1:xxxx` (port is shown in the console).
-
-### Quick Start Guide
-
-1. **Load Data** — Click "Load Demo Data (Iris)" in the sidebar, or upload your own CSV file.
-2. **Add Modules** — Click any button under "Pipeline Tools" (Filter, Select, Mutate, etc.) to add a module card.
-3. **Configure** — Set options in each module card (e.g., select columns, set filter conditions).
-4. **View Results** — The "Data Preview / Result" table and "R Code Preview" update in real time.
-5. **Copy Code** — Copy the generated R code from the preview panel to use in your own scripts.
-
----
-
-## 📦 Project Structure
-
-```
-tidyblock/
-├── app.R                  # Entry point — launches the Shiny app
-├── DESCRIPTION            # R package metadata (version, dependencies)
-├── NAMESPACE              # R namespace declarations
-├── CHANGELOG.md           # Version history
-├── environment.yml        # Conda environment definition
-├── iris.csv               # Demo dataset
-├── R/
-│   ├── app_ui.R           # Main UI layout (sidebar + main panel)
-│   ├── app_server.R       # Main server logic (pipeline execution engine)
-│   ├── mod_import.R       # Data import module (CSV upload, demo data, preview)
-│   ├── mod_filter.R       # Advanced filter module (AND/OR groups, rules)
-│   ├── mod_select.R       # Column selection module
-│   ├── mod_mutate.R       # Column creation module
-│   ├── mod_group_by.R     # Group-by module
-│   ├── mod_summarize.R    # Summarize/aggregate module
-│   ├── mod_arrange.R      # Sort/arrange module
-│   ├── mod_join.R         # Join module (left, inner, right, full)
-│   ├── mod_plot.R         # ggplot2 visualization module
-│   └── utils_codegen.R    # Pipeline code generation utilities
-├── man/                   # R documentation (auto-generated)
-├── tests/                 # Unit tests (testthat)
-└── DEBUGGING.md           # Debugging guide for developers
-```
-
----
-
-## 🔧 Module Reference
-
-### Filter (Advanced)
-Build complex filter conditions with nested AND/OR logic.
-
-```r
-# Example generated code:
-iris |>
-  filter((Sepal.Length > 5 & Species == 'setosa') | Petal.Width < 0.3)
-```
-
-- **AND/OR Groups**: Combine conditions with logical operators
-- **Nested Groups**: Create sub-groups for complex logic (e.g., `A AND (B OR C)`)
-- **Operators**: `==`, `!=`, `>`, `<`, `>=`, `<=`, `%in%`
-
-### Select
-Choose columns to keep in the dataset.
-
-```r
-iris |> select(`Sepal.Length`, `Sepal.Width`, `Species`)
-```
-
-### Mutate
-Create new columns with R expressions.
-
-```r
-iris |> mutate(`sepal_ratio` = `Sepal.Length` / `Sepal.Width`)
-```
-
-- **Helper Functions**: Quick insert for `log()`, `sqrt()`, `abs()`, `round()`, `paste0()`, `as.numeric()`, `as.character()`, `ifelse()`
-
-### Group By + Summarize
-Group data and compute aggregations.
-
-```r
-iris |>
-  group_by(`Species`) |>
-  summarize(`mean_sl` = mean(`Sepal.Length`), .groups = 'drop')
-```
-
-- **Functions**: `mean`, `sum`, `median`, `sd`, `min`, `max`, `n`, `n_distinct`
-- **Optional Secondary Statistic**: Add a second aggregation (e.g., mean ± sd)
-
-### Arrange
-Sort data by a column.
-
-```r
-iris |> arrange(desc(`Sepal.Length`))
-```
-
-### Join
-Combine datasets with dplyr join functions.
-
-```r
-iris |> left_join(other_data, by = c("Species"))
-```
-
-- **Join Types**: Left, Inner, Right, Full
-- **Auto-detected Keys**: Common columns between datasets are automatically suggested
-
-### Plot
-Create ggplot2 visualizations.
-
-```r
-iris |>
-  ggplot(aes(x = `Sepal.Length`, y = `Sepal.Width`, color = `Species`)) +
-  geom_point() +
-  theme_minimal()
-```
-
-- **Geometries**: Point, Bar (auto-switches to `geom_col`), Line, Boxplot
-- **Optional Error Bars**: `geom_errorbar()` with ymin/ymax
-- **Themes**: gray, bw, linedraw, light, dark, minimal, classic, void
-
----
-
-## 🏷️ Version History
-
-### v1.0.0 (2026-02-15) — Initial Stable Release
-
-The first public release with all core data-wrangling modules fully functional.
-
-**What's included:**
-- ✅ All 8 pipeline modules (Filter, Select, Mutate, Group By, Summarize, Arrange, Join, Plot)
-- ✅ Advanced Filter with AND/OR nested group logic
-- ✅ Real-time code generation and data preview
-- ✅ Resizable module cards (`shinyjqui`)
-- ✅ Reactive pipeline execution with error handling
-- ✅ Server-side DataTable rendering for performance
-- ✅ Conda environment for reproducible setup
-
-**Bug Fixes from Development:**
-- Fixed reactive circular dependency that caused UI to freeze after loading data
-- Fixed `DT::renderDT(server = FALSE)` blocking the Shiny event loop
-- Re-enabled `jqui_resizable()` on all module cards
-- Restored full Filter (Advanced) UI from test placeholder
-
-### v0.1.0 (2026-02-04) — Development Preview
-
-Internal development version. Not publicly released.
-
-**What was included:**
-- ⚠️ Basic project scaffolding
-- ⚠️ Import module with CSV upload and demo data
-- ⚠️ Placeholder module files (not fully functional)
-- ❌ Pipeline tools did not work after loading data (reactive loop bug)
-- ❌ Module cards were not resizable (`jqui_resizable` commented out)
-- ❌ Filter UI was a test placeholder
-
-> For the full changelog, see [CHANGELOG.md](./CHANGELOG.md).
-
----
-
-## 🛠️ Development
-
-### Running in Development Mode
-
-```bash
-conda activate void
-R -e "shiny::runApp(port=5100)"
-```
-
-### Running Tests
-
-```bash
-conda activate void
-R -e "devtools::test()"
-```
-
-### Regenerating Documentation
-
-```bash
-conda activate void
-R -e "devtools::document()"
-```
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
-
----
-
-## 🙏 Acknowledgments
-
-- [Shiny](https://shiny.posit.co/) — Web application framework for R
-- [bslib](https://rstudio.github.io/bslib/) — Bootstrap 5 for Shiny
-- [dplyr](https://dplyr.tidyverse.org/) — Data manipulation grammar
-- [ggplot2](https://ggplot2.tidyverse.org/) — Data visualization grammar
-- [shinyjqui](https://yang-tang.github.io/shinyjqui/) — jQuery UI interactions for Shiny
-- [DT](https://rstudio.github.io/DT/) — Interactive data tables
+## License
+MIT License.
