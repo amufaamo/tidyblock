@@ -3,7 +3,7 @@
 
 TidyBlock is an intuitive, open-source `R Shiny` application designed to bring the power of the `tidyverse` and `ggplot2` to users who prefer a graphical, spreadsheet-like interface over scripting. It bridges the gap between traditional manual tools like Microsoft Excel and robust, reproducible R-based pipelines.
 
-![TidyBlock Plot Builder UI](https://raw.githubusercontent.com/tidyverse/ggplot2/main/man/figures/logo.png) <!-- Update with an actual screenshot later -->
+![TidyBlock Plot Builder UI](logo.png)
 
 ## ✅ Features
 
