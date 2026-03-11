@@ -22,7 +22,8 @@ plotTabUI <- function(id, cols) {
     "None", "geom_point", "geom_line", "geom_histogram", "geom_density",
     "geom_dotplot", "geom_boxplot", "geom_violin", "geom_jitter",
     "geom_col", "geom_bin_2d", "geom_errorbar", "geom_smooth",
-    "geom_ribbon", "geom_qq", "geom_text", "geom_hline", "geom_sf"
+    "geom_ribbon", "geom_qq", "geom_text", "geom_label",
+    "geom_hline", "geom_vline", "geom_sf"
   )
   stat_choices <- c("default", "identity", "count", "density", "bin", "summary", "boxplot")
 
@@ -350,8 +351,8 @@ ui <- page_fillable(
       ),
       tags$ul(
         class = "dropdown-menu shadow-sm",
-        tags$li(actionLink("menu_arrange_asc", "Sort Sheet Z-A", icon = icon("sort-alpha-down"), class = "dropdown-item")),
-        tags$li(actionLink("menu_arrange_desc", "Sort Sheet A-Z", icon = icon("sort-alpha-up"), class = "dropdown-item"))
+        tags$li(actionLink("menu_arrange_asc", "Sort A-Z (Ascending)", icon = icon("sort-alpha-down"), class = "dropdown-item")),
+        tags$li(actionLink("menu_arrange_desc", "Sort Z-A (Descending)", icon = icon("sort-alpha-up"), class = "dropdown-item"))
       )
     ),
     div(

@@ -4,12 +4,13 @@
 
 ## **1. プロジェクト概要 (Project Overview)**
 
-* **Goal:** プログラミング未経験者が、直感的なGUI操作（エクセル風・スプレッドシート型）を通じてTidyverseによるデータ整形（Wrangling）を行い、データ操作を自然に行えるアプリケーションを開発する。  
-* **Target Journal:** **JOSS (Journal of Open Source Software)**  
-* **Core Value:**  
-  1. **Spreadsheet-like Workflow:** 使い慣れたスプレッドシートUIでのデータ操作と、背後でのTidyverse処理の統合。
-  2. **Modern UX:** bslib と rhandsontable を駆使した、デスクトップアプリのような滑らかな操作感。  
-  3. **Reproducibility:** Conda環境とRパッケージ構造による完全な再現性。
+* **Goal:** Rを使えないプログラミング未経験者が、Tidyverse・ggplot2の**全機能**をGUI操作だけで利用できるアプリケーションを開発する。操作感はExcelのように直感的なスプレッドシート型とし、コードを一切書かずにデータ整形・集計・可視化の全工程を完結できることを目指す。
+* **Target Journal:** **JOSS (Journal of Open Source Software)** — 論文の投稿から**出版（Publication）**まで完遂することを目標とする。
+* **Core Value:**
+  1. **Excel-like Intuitive Operation:** Rの知識ゼロでも使えるスプレッドシートUIを最優先とし、セル編集・右クリックメニュー・モーダルダイアログによる完全GUI操作を実現する。
+  2. **Full Tidyverse Coverage:** dplyr・tidyr・ggplot2・stringr・forcats・lubridateを網羅し、Tidyverseエコシステムの全主要機能をGUIから利用可能にする。
+  3. **Modern UX:** bslib と rhandsontable を駆使した、デスクトップアプリのような滑らかな操作感。
+  4. **Reproducibility:** Conda環境とRパッケージ構造による完全な再現性。
 
 ## **2. 開発環境 (Environment)**
 
@@ -151,16 +152,17 @@ dependencies:
    * `theme()` を用いた要素レベルのカスタマイズ（`element_text`, `element_line`, `element_rect`）による非データインク制御（背景色やグリッド線の有無など）の完全なGUI化。
    * v4.0アーキテクチャに準拠した `theme(geom)` などのロール指向スタイル調整へのUI対応。
 
-### **➤ Phase 7: JOSS Polish (論文・品質保証)**
+### **➤ Phase 7: JOSS Polish (論文・品質保証・出版)**
 
 **指示:**
 
-**Phase 7** の実装です。JOSS投稿に向けた最終仕上げを行います。
+**Phase 7** の実装です。JOSS への投稿から**出版（Publication）**まで完遂することを目標に最終仕上げを行います。
 
 1. **テスト作成:** `testthat` をセットアップし、データ変換ロジックが正しく機能するかテストを作成。
 2. **ドキュメント整備:** 実装したロジックに関する主要なコメント・ドキュメントを整理。
 3. **CI/CD:** GitHub Actions のワークフローを作成し検証。
 4. **論文ドラフト:** JOSSのガイドラインに従い、`paper.md` の下書きを作成。
+5. **査読対応:** JOSS査読者からのフィードバックに対応し、論文・ソフトウェア双方を改善して**出版まで完遂**する。
 
 ---
 
