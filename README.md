@@ -1,77 +1,110 @@
 # TidyBlock 🧱📊
-**A Spreadsheet-like GUI for Tidyverse Data Wrangling and ggplot2 Visualization**
 
-TidyBlock is an intuitive, open-source `R Shiny` application designed to bring the power of the `tidyverse` and `ggplot2` to users who prefer a graphical, spreadsheet-like interface over scripting. It bridges the gap between traditional manual tools like Microsoft Excel and robust, reproducible R-based pipelines.
+**A Spreadsheet-based GUI for Tidyverse Data Wrangling and ggplot2 Visualization**
 
-![TidyBlock Plot Builder UI](logo.png)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✅ Features
+TidyBlock is an open-source R Shiny application that provides a modern, spreadsheet-like graphical interface for data analysis. It brings the full power of the tidyverse and ggplot2 to researchers, students, and analysts who prefer point-and-click interactions over scripting.
 
-### 1. Spreadsheet Interaction
-Built on top of `rhandsontable`, TidyBlock offers an intuitive Excel-like experience inside your browser. Navigate cells, drop down columns, sort tables on the fly with a click, and manually verify data just as you would in standard spreadsheet software.
+![TidyBlock Screenshot](logo.png)
 
-### 2. Core Data Wrangling (Dplyr & Tidyr)
-Transform your data without writing code. A modern top-navigation toolbar organizes operations logically into Rows, Columns, and Reshape functions, including:
-- **Filtering & Distinct (`filter`, `distinct`)**
-- **Column Operations (`select`, `rename`)**
-- **Dynamic Variable Creation (`mutate` with helpers from `stringr` and `lubridate` APIs)**
-- **Grouping and Aggregation (`group_by %>% summarise`)**
-- **Table Combination (`left_join`, `inner_join`)**
-- **Reshaping (`pivot_longer`, `pivot_wider`)**
+## ✨ Features
 
-### 3. Advanced ggplot2 Builder (Layer by Layer)
-Eliminate the steep learning curve of R data visualization. TidyBlock includes an integrated "Plot Explorer" mode that spins off complex visualizations. Using a side-by-side builder, users can:
-- **Aesthetic Mapping:** Assign global traits like `x`, `y`, `color`, `fill`, `alpha`, and advanced mappings (e.g., `y = after_stat(density)`).
-- **Multiple Layers:** Synthesize and overlap geometries (`geom_point`, `geom_smooth`, `geom_density`, `geom_boxplot`, and over 15 others).
-- **Annotations:** Draw direct statistical baselines with inputs like `geom_hline` intercepts.
-- **Scales & Coordinates:** Adjust axis limits intuitively, compress out-of-bounds outliers (`oob_squish`), and transform views entirely via log10 scalers or `coord_radial/polar` spatial views.
-- **Grids & Themes:** Instantly apply `theme_minimal`, modify base grid grids, or inject rich ColorBrewer palettes.
+### Spreadsheet Canvas
+An interactive, Excel-like data grid (powered by `rhandsontable`) with direct cell editing, drag-and-drop row/column reordering, and right-click context menus for quick access to data operations.
 
-### 4. Non-Destructive Workflows
-Every fundamental change you make—like aggregating the data or reshaping its dimensions—does *not* overwrite your base document. Instead, actions spawn brand **new tabs**, preserving the original spreadsheet while visually logging a sequential state history.
+### Data Operations (No Code Required)
+All operations are accessible through toolbar buttons, dropdown menus, and right-click context menus:
 
-## 🛠 Installation / Setup
+| Category | Operations |
+|---|---|
+| **Row Operations** | Filter (with AND/OR logic), Sort (A→Z / Z→A), Remove Duplicates |
+| **Column Operations** | Select columns, Rename, Add/Compute Column (with helpers for text, date, and category functions) |
+| **Reshape** | Unpivot (Wide → Long), Pivot (Long → Wide) |
+| **Aggregation** | Group By + Summarize (Average, Sum, Min, Max, Count) — results open in a new tab |
+| **Table Joins** | Left, Inner, Right, Full Join with automatic key detection and Left/Right swap |
 
-You can deploy TidyBlock using `R` and standard packages.
+### Chart Builder (ggplot2-based)
+A guided, side-by-side Plot Builder with live preview:
+
+- **19 chart types**: Scatter, Line, Histogram, Box Plot, Violin, Bar Chart, Density, Trend Line, and more
+- **Data mapping**: X/Y axes, Color, Fill, Opacity, Size, Shape, Line Style, Group
+- **Scales & Coordinates**: Standard, Polar, Radial, Fixed Ratio; Log10 transforms; Color Brewer, Viridis, Gradient palettes
+- **Split by Group (Facets)**: Flexible grid or wrap layouts with independent axis scaling
+- **Themes**: Minimal, Classic, Dark, Light, Black & White, and more — with font size, grid, and legend controls
+- **Plot Merging**: Overlay compatible plots (matching X/Y axes) to create composite visualizations
+
+### Non-Destructive Workflows
+Structural transformations (summarization, reshaping, joins) create **new tabs** rather than overwriting the original data. All in-place operations support multi-step undo.
+
+## 🛠 Installation
 
 ### Prerequisites
 
-Ensure you have R (>= 4.3.0) installed. We recommend using `renv` or the included `environment.yml` for Conda to handle the `shiny` and `tidyverse` requirements safely.
+- R (>= 4.3.0)
 
-1. Clone this repository to your local machine:
+### Quick Start
+
+1. Clone the repository:
    ```bash
    git clone https://github.com/amufaamo/tidyblock.git
    cd tidyblock
    ```
 
-2. Open R and install the necessary dependencies from CRAN:
+2. Install dependencies:
    ```R
    install.packages(c(
-     "shiny", "bslib", "dplyr", "tidyr", "ggplot2", 
-     "rhandsontable", "DT", "forcats", "stringr", "lubridate", "scales"
+     "shiny", "bslib", "dplyr", "tidyr", "ggplot2",
+     "rhandsontable", "DT", "rlang", "readr", "readxl",
+     "forcats", "stringr", "lubridate", "scales"
    ))
    ```
 
-3. Start the application:
+3. Run the application:
    ```R
-   shiny::runApp('app.R')
+   shiny::runApp("app.R")
    ```
+
+### Using Conda
+
+```bash
+conda env create -f environment.yml
+conda activate void
+Rscript -e "shiny::runApp('app.R')"
+```
 
 ## 🧪 Testing
 
-TidyBlock incorporates `testthat` for automatic validation of its UI-driven data wrangling logic. Tests cover core operations from parsing raw UI logic filters down to validating structural `pivot` actions.
-Run tests via:
+TidyBlock uses `testthat` for automated testing of core data transformation logic.
+
 ```R
 library(testthat)
 test_dir("tests/")
 ```
-GitHub Actions ensures unit testing validates every commit to `master/main`.
 
-## 📄 Submission to JOSS
-This tool is formulated for submission to the **Journal of Open Source Software (JOSS)**. The associated paper draft is located in `paper.md`, documenting the underlying framework, educational viability, and need for the software across empirical research domains. 
+GitHub Actions validates every push to the main branch.
 
-## 👨‍💻 Contributing
-Pull requests, feature suggestions, and bug reports are heavily encouraged.
+## 📄 JOSS Paper
 
-## License
-MIT License.
+This software is submitted to the **Journal of Open Source Software (JOSS)**. The associated paper is located in [`paper.md`](paper.md).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
+
+- Reporting bugs
+- Suggesting features
+- Submitting pull requests
+
+## 📝 License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+## 📖 Citation
+
+If you use TidyBlock in your research, please cite:
+
+```
+Kagawa, M., (2026). TidyBlock: A Spreadsheet-based GUI for Tidyverse Data Wrangling
+and ggplot2 Visualization. Journal of Open Source Software.
+```

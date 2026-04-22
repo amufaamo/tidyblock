@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-04-21
+
+### Improved
+
+- **Data Import**
+  - Added support for sequential file uploads. Previously, subsequent uploads were not easily accessible in the modular version of the app.
+  - Introduced a "Active Dataset" selector in the Import module, allowing users to switch between all uploaded datasets.
+  - New uploads are now automatically selected as the active dataset, providing immediate feedback and making them ready for the processing pipeline.
+
+## [1.0.1] - 2026-04-21
+
+### Fixed
+
+- **Data Import**
+  - Added support for CSV files with comments starting with `#`. Files can now be uploaded and read correctly even if they contain metadata or comments in the header.
+
+### Added
+
+- **Data Import**
+  - Added native support for TSV (Tab-Separated Values) files in both the modular and monolithic application versions.
+  - Updated code generation to include the `comment = "#"` argument for reproducibility when importing CSV/TSV files.
+
 ## [1.0.0] - 2026-02-15
 
 ### 🎉 Initial Stable Release

@@ -1,0 +1,41 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Package build
+*.tar.gz
+*.Rcheck/
+src/*.o
+src/*.so
+src/*.dll
+
+# Byte-compiled
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Conda
+.conda/
+
+# Gemini / Agent
+.gemini/
+.agent/
+
+# Logs
+*.log
+
+# Data (keep iris.csv as demo)
+data/
+!iris.csv

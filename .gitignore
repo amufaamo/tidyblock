@@ -39,3 +39,5 @@ Thumbs.db
 # Data (keep iris.csv as demo)
 data/
 !iris.csv
+*.gdoc
+
